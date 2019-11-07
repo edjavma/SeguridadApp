@@ -107,7 +107,7 @@ public class TratamientoRiesgoService implements ITratamientoService {
 				Long id = tratamientoRiesgoRepository.getId();
 				if(tratamiento.getIdTratamientoRiesgo() == null)
 					tratamiento.setIdTratamientoRiesgo(id.intValue());
-				tratamiento.setCorrelativo(evaluacionRiesgoRepository.findByIdRiesgo(data.getId()));
+				tratamiento.setCorrelativo(evaluacionRiesgoRepository.findOne(data.getId()));
 				tratamiento.setIdSolucion(solucion);				
 				tratamientoRiesgoRepository.save(tratamiento);
 				

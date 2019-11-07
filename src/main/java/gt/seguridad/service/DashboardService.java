@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.ietf.jgss.Oid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,17 +29,17 @@ public class DashboardService implements IDashboardService {
 	private ClasificacionRiesgoRepository clasificacionRiesgoRepository;
 
 	@Override
-	public List<Data> getInfoDashboard(Integer selectedType) {
+	public List<Data> getInfoDashboard(Integer selectedType, String idArquitectura) {
 		try {
 			switch (DashboardType.find(selectedType)) {
 			case TIPO_RIESGO:
-				return evaluacionRiesgoRepository.getInfoDashboardRiesgo();
+				return evaluacionRiesgoRepository.getInfoDashboardRiesgo(idArquitectura);
 			case TIPO_IMPACTO:
-				return evaluacionRiesgoRepository.getInfoDashboardImpacto();
+				return evaluacionRiesgoRepository.getInfoDashboardImpacto(idArquitectura);
 			case TIPO_BRECHA:
-				return evaluacionRiesgoRepository.getInfoDashboardBrecha();
+				return evaluacionRiesgoRepository.getInfoDashboardBrecha(idArquitectura);
 			case TIPO_TRATAMIENTO:
-				return evaluacionRiesgoRepository.getInfoDashboardTratamiento();
+				return evaluacionRiesgoRepository.getInfoDashboardTratamiento(idArquitectura);
 			default:
 				break;
 			}
@@ -61,10 +62,10 @@ public class DashboardService implements IDashboardService {
 	}
 
 	@Override
-	public Dashboard generateDashboard(Integer selectedType) {
+	public Dashboard generateDashboard(Integer selectedType, String idArquitectura) {
 		Dashboard dashboard = new Dashboard();
 		try {
-			List<Data> data = getInfoDashboard(selectedType);
+			List<Data> data = getInfoDashboard(selectedType, idArquitectura);
 			List<Evaluacion> evaluaciones = new ArrayList<>();
 			Evaluacion evaluacion = new Evaluacion();
 			

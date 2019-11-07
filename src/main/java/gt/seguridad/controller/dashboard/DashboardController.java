@@ -20,9 +20,15 @@ public class DashboardController {
 	private DashboardService dashboardService;
 	
 	@RequestMapping(value = "/generar", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public Dashboard generar(@RequestParam("selectedType") Integer selectedType) {
+	public Dashboard generar(@RequestParam("selectedType") Integer selectedType, @RequestParam(value = "idArquitectura", required = false) String idArquitectura) {
 		try {
-			return dashboardService.generateDashboard(selectedType);
+			if(idArquitectura == null) {
+				idArquitectura = "";			
+			}else if(idArquitectura.equalsIgnoreCase("undefined")) {
+				idArquitectura = "";
+			}
+			
+			return dashboardService.generateDashboard(selectedType, idArquitectura);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

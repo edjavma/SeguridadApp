@@ -36,8 +36,8 @@ public interface EvaluacionRiesgoRepository extends JpaRepository<EvaluacionRies
 			   "ORDER BY R.ID_RIESGO_CAPA, R.ID_TIPO_RIESGO, R.ID_TIPO_IMPACTO, R.ID_TIPO_BRECHA ", nativeQuery = true)
 	public List<EvaluacionRiesgo> listAll();
 	
-	public List<Data> getInfoDashboardRiesgo();
-	public List<Data> getInfoDashboardImpacto();
-	public List<Data> getInfoDashboardBrecha();
-	public List<Data> getInfoDashboardTratamiento();
+	public List<Data> getInfoDashboardRiesgo(String idArquitectura);
+	public List<Data> getInfoDashboardImpacto(String idArquitectura);
+	public List<Data> getInfoDashboardBrecha(String idArquitectura);
+	public List<Data> getInfoDashboardTratamiento(String idArquitectura);
 }
